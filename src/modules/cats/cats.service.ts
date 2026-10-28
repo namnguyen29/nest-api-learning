@@ -53,10 +53,11 @@ export class CatsService {
       throw new NotFoundException('Cat Not Found');
     }
 
+    const { name, address } = request;
     const updatedCat: Cat = {
       id,
-      name: request.name,
-      address: request.address,
+      name,
+      address,
     };
 
     cats[catIndex] = updatedCat;
