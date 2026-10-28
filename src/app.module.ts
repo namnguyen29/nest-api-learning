@@ -5,10 +5,11 @@ import { AppService } from './app.service.js';
 import { CatsModule } from './modules/cats/cats.module.js';
 import { CatsController } from './modules/cats/cats.controller.js';
 
-import { LoggerMiddleware, noClassLoger } from './logger/index.js';
+import { LoggerMiddleware, noClassLoger } from './middlewares/index.js';
+import { DogsModule } from './modules/dogs/dogs.module.js';
 
 @Module({
-  imports: [CatsModule],
+  imports: [CatsModule, DogsModule],
   controllers: [AppController],
   providers: [AppService],
 })
