@@ -30,7 +30,7 @@ export class CatsController {
   }
 
   @Get(':id')
-  public findById(@Param() id: string): Cat {
+  public findById(@Param('id') id: string): Cat {
     console.log(id);
     return this.catsService.findById(id);
   }
