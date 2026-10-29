@@ -10,7 +10,7 @@ export const environemnt: Environment = {
   timeout: '1000',
 };
 
-export const environmentProvider = (value: Environment): ValueProvider => ({
+export const provideEnvironment = (value: Environment): ValueProvider => ({
   provide: 'APP_ENV',
   useValue: value,
 });

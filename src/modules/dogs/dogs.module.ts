@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { DogsController } from './dogs.controller.js';
-import { environemnt, environmentProvider } from '@/configs/environment.js';
+import { environemnt, provideEnvironment } from '@/configs/environment.js';
 
 @Module({
   controllers: [DogsController],
-  providers: [environmentProvider(environemnt)],
+  providers: [provideEnvironment(environemnt)],
 })
 export class DogsModule {}

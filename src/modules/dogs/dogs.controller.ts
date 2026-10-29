@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Inject, Param, ParseUUIDPipe, UseFilters } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Inject, Param, ParseIntPipe, UseFilters } from '@nestjs/common';
 
 import { type Environment } from '@/configs/environment.js';
 import { HttpExceptionFilter } from '@/filters/http-exception.filter.js';
@@ -18,7 +18,7 @@ export class DogsController {
   }
 
   @Get(':id')
-  public findOne(@Param('id', ParseUUIDPipe) id: string) {
+  public findOne(@Param('id', ParseIntPipe) id: string) {
     return `Find a dog with id: ${id}`;
   }
 }
