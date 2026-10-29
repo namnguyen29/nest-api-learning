@@ -10,15 +10,20 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { CatsService } from './cats.service.js';
 import { CreateCatDto, type Cat } from './cats.dto.js';
+import { RolesGuard } from '@/guards/roles/roles.guard.js';
+import { Roles } from '@/guards/roles/roles.decorator.js';
 
 @Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
+  @UseGuards(RolesGuard)
+  @Roles(['admin'])
   public findAll(): Cat[] {
     return this.catsService.findAll();
   }
