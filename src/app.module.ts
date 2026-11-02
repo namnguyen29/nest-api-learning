@@ -8,11 +8,12 @@ import { CatsController } from './modules/cats/cats.controller.js';
 import { LoggerMiddleware, noClassLoger } from './middlewares/index.js';
 import { DogsModule } from './modules/dogs/dogs.module.js';
 import { provideAuthGuard } from './guards/auth/auth.guard.js';
+import { provideLoggingInterceptor } from './interceptors/logging/logging.interceptor.js';
 
 @Module({
   imports: [CatsModule, DogsModule],
   controllers: [AppController],
-  providers: [AppService, provideAuthGuard()],
+  providers: [AppService, provideAuthGuard(), provideLoggingInterceptor()],
 })
 export class AppModule implements NestModule {
   public configure(consumer: MiddlewareConsumer): void {

@@ -1,4 +1,5 @@
 import { type ValueProvider } from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
 
 export interface Environment {
   baseUrl: string;
@@ -10,7 +11,9 @@ export const environemnt: Environment = {
   timeout: '1000',
 };
 
+export const APP_ENV = Symbol('APP_ENV');
+
 export const provideEnvironment = (value: Environment): ValueProvider => ({
-  provide: 'APP_ENV',
+  provide: APP_ENV,
   useValue: value,
 });

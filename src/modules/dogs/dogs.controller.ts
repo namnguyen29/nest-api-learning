@@ -1,12 +1,24 @@
-import { Controller, Get, HttpException, HttpStatus, Inject, Param, ParseIntPipe, UseFilters } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Param,
+  ParseIntPipe,
+  UseFilters,
+  UseInterceptors,
+} from '@nestjs/common';
 
-import { type Environment } from '@/configs/environment.js';
+import { APP_ENV, type Environment } from '@/configs/environment.js';
 import { HttpExceptionFilter } from '@/filters/http-exception.filter.js';
+import { TimeoutInterceptor } from '@/interceptors/timeout/timeout.interceptor.js';
+import { sleep } from './dogs.helper.js';
 
 @Controller('dogs')
 export class DogsController {
   constructor(
-    @Inject('APP_ENV')
+    @Inject(APP_ENV)
     private readonly env: Environment,
   ) {}
 
@@ -18,7 +30,9 @@ export class DogsController {
   }
 
   @Get(':id')
-  public findOne(@Param('id', ParseIntPipe) id: string) {
+  @UseInterceptors(TimeoutInterceptor)
+  public async findOne(@Param('id', ParseIntPipe) id: string) {
+    await sleep();
     return `Find a dog with id: ${id}`;
   }
 }
