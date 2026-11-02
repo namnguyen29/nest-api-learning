@@ -5,6 +5,7 @@ import type { NextFunction, Request, Response } from 'express';
 export class LoggerMiddleware implements NestMiddleware {
   public use(req: Request, res: Response, next: NextFunction): void {
     const startTime = Date.now();
+    console.log('Middleware Class Logger');
 
     res.on('finish', () => {
       const duration = Date.now() - startTime;

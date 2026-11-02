@@ -18,7 +18,8 @@ export interface AuthenticatedRequest extends Request {
 export class AuthGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     console.log('auth guard context');
-    const request = context.switchToHttp().getRequest<AuthenticatedRequest>();
+    const ctx = context.switchToHttp();
+    const request = ctx.getRequest<AuthenticatedRequest>();
 
     const roleFromHeader = request.headers['x-role'];
     const roles: TRole[] = isRole(roleFromHeader) ? [roleFromHeader] : ['user'];

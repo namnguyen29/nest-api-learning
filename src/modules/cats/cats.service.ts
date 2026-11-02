@@ -1,12 +1,12 @@
 import { HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import cats from './cats.json' with { type: 'json' };
 import { type CreateCatDto, type Cat } from './cats.dto.js';
-import { type Environment } from '@/configs/environment.js';
+import { APP_ENV, type Environment } from '@/configs/environment.js';
 
 @Injectable()
 export class CatsService {
   constructor(
-    @Inject('APP_ENV')
+    @Inject(APP_ENV)
     private readonly env: Environment,
   ) {}
 
